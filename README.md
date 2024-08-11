@@ -8,7 +8,7 @@ An official source code for paper Dual-Center Graph Clustering Based on Neighbor
 <p align = "justify"> 
 Graph clustering is crucial for unraveling intricate data structures, yet it presents significant challenges owing to its unsupervised nature. Recently, target-driven clustering techniques have yielded impressive results, with contrastive learning methods leveraging pseudo-labels garnering considerable attention. Nonetheless, existing approaches rely on label distribution for network learning supervision, limiting them to single-center clustering optimization, resulting in incomplete and less robust guidance. In this work, we introduce two key enhancements to current methods based on neighbor distribution properties and propose a novel Dual-Center Graph Clustering (DCGC) approach. Our method incorporates neighbor distribution representation learning and a dual-clustering-center optimization module. By utilizing neighbor distribution as a supervisory signal, we bolster network representation learning, demonstrating enhanced robustness compared to relying solely on labels. Furthermore, we integrate neighbor distribution centers with embedding centers, enforcing dual-center constraints for network optimization. Through extensive experiments and analyses, we showcase the superior performance and effectiveness of our proposed method. 
 <div  align="center">    
-    <img src="./assets/DCGC.png" width=80%/>
+    <img src="./assets/DCGC.pdf" width=80%/>
 </div>
 
 
