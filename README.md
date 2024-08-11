@@ -36,7 +36,7 @@ Python package information is summarized in **requirements.txt**:
 
 - Step2: unzip the dataset into the **./dataset** folder
 
-- Step3: "mkdir pretrain" to create **./pretrain** folder
+- Step3: use "mkdir pretrain" to create **./pretrain** folder
 
 - Step4: run
 
