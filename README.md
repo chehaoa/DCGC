@@ -1,12 +1,12 @@
 # DCGC
-An official source code for paper Dual-Center Graph Clustering Based on Neighbor Distribution
+An official source code for paper Dual-Center Graph Clustering with Neighbor Distribution
 
 -------------
 
 ### Overview
 
 <p align = "justify"> 
-Graph clustering is crucial for unraveling intricate data structures, yet it presents significant challenges due to its unsupervised nature. Recently, goal-directed clustering techniques have yielded impressive results, with contrastive learning methods leveraging pseudo-label garnering considerable attention. Nonetheless, pseudo-label as a supervision signal is unreliable and existing goal-directed approaches utilize only features to construct a single-target distribution for single-center optimization, which lead to incomplete and less dependable guidance. In our work, we propose a novel Dual-Center Graph Clustering (DCGC) approach based on neighbor distribution properties, which includes representation learning with neighbor distribution and dual-center optimization. Specifically, we utilize neighbor distribution as a supervision signal to mine hard negative samples in contrastive learning, which is reliable and enhances the capability of representation learning. Furthermore, neighbor distribution center is introduced alongside feature center to jointly construct a dual-target distribution for dual-center optimization. Extensive experiments and analysis demonstrate the superior performance and effectiveness of our proposed method.
+Graph clustering is crucial for unraveling intricate data structures, yet it presents significant challenges due to its unsupervised nature. Recently, goal-directed clustering techniques have yielded impressive results, with contrastive learning methods leveraging pseudo-label garnering considerable attention. Nonetheless, pseudo-label as a supervision signal is unreliable and existing goal-directed approaches utilize only features to construct a single-target distribution for single-center optimization, which lead to incomplete and less dependable guidance. In our work, we propose a novel Dual-Center Graph Clustering (DCGC) approach with neighbor distribution properties, which includes representation learning with neighbor distribution and dual-center optimization. Specifically, we utilize neighbor distribution as a supervision signal to mine hard negative samples in contrastive learning, which is reliable and enhances the capability of representation learning. Furthermore, neighbor distribution center is introduced alongside feature center to jointly construct a dual-target distribution for dual-center optimization. Extensive experiments and analysis demonstrate the superior performance and effectiveness of our proposed method.
 <div  align="center">    
     <img src="./assets/DCGC.png" width=80%/>
 </div>
