@@ -52,6 +52,7 @@ class DCGC(nn.Module):
 
         self.KL_loss = nn.KLDivLoss(reduction='batchmean')
 
+        self._lambda = nn.Parameter(torch.tensor(0.5))
         if act == "ident":
             self.activate = lambda x: x
         if act == "sigmoid":
@@ -101,7 +102,7 @@ class DCGC(nn.Module):
         target = target_distribution(Q).detach()
         cluster_loss = self.KL_loss((y_p_clu+1e-08).log(), target)/y_p_clu.shape[0]
         neighbor_loss = self.KL_loss((y_p_nei+1e-08).log(), target)/y_p_nei.shape[0]
-        dual_centers_loss = cluster_loss + neighbor_loss
+        dual_centers_loss = self._lambda * cluster_loss + (1 - self._lambda) * neighbor_loss
         return dual_centers_loss
     
     def infoNCE(self, Z1, Z2):
@@ -201,29 +202,4 @@ class DCGC(nn.Module):
         con_loss = 0.5 * (F.kl_div(Z1, Q, reduction="batchmean") + F.kl_div(Z2, Q, reduction="batchmean"))
         return con_loss
     
-    def loss_pre(self, Z1, Z2, epoch):
-        temp = max(0, (epoch - args.clu_epoch) / 10.0)
-        cl_loss = 0.7 * self.infoNCE(Z1, Z2)
-        kl_loss = temp * self.clustering_loss(Z1, Z2)
-        print(f"kl_loss: {kl_loss}, cl_loss: {cl_loss}")
-
-        loss = cl_loss + kl_loss
-        return loss
-    
-    def loss_neighbor(self, Z1, Z2, A):
-        cl_loss = 0.7 * self.neighbor_infoNCE(Z1, Z2, A)
-        kl_loss = (1 - 0.7) * self.neighbor_loss(Z1, Z2, A)
-        print(f"kl_loss: {kl_loss}, cl_loss: {cl_loss}")
-
-        loss = kl_loss + cl_loss
-        return loss
-    
-    def pseudo_matrix_old(self, y_pred, A):
-        y_pred = torch.tensor(y_pred)
-        y_hat_onehot = F.one_hot(y_pred, self.cluster_num).to(args.device)
-        K = neighbor_similarity(A, y_hat_onehot.float().to(args.device))
-        K_norm = (K - K.min()) / (K.max() - K.min())
-        M_mat = torch.abs(1 - K_norm) ** args.beta
-        M = torch.cat([torch.diag(M_mat, self.node_num), torch.diag(M_mat, -self.node_num)], dim=0)
-        return M, M_mat
     
